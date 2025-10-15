@@ -1,0 +1,680 @@
+{
+    "info": {
+        "name": "SabPaisa Reports API Collection",
+        "description": "Complete API collection for SabPaisa Reports API with all 38 endpoints",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "token",
+                "value": "{{access_token}}",
+                "type": "string"
+            }
+        ]
+    },
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8000/api/v1",
+            "type": "string"
+        },
+        {
+            "key": "access_token",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "refresh_token",
+            "value": "",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "1. Authentication",
+            "item": [
+                {
+                    "name": "Login",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 200) {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.collectionVariables.set('access_token', response.data.access);",
+                                    "    pm.collectionVariables.set('refresh_token', response.data.refresh);",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/login/",
+                            "host": ["{{base_url}}"],
+                            "path": ["auth", "login", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Logout",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/logout/",
+                            "host": ["{{base_url}}"],
+                            "path": ["auth", "logout", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Refresh Token",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "if (pm.response.code === 200) {",
+                                    "    const response = pm.response.json();",
+                                    "    pm.collectionVariables.set('access_token', response.data.access);",
+                                    "}"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"refresh\": \"{{refresh_token}}\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/refresh/",
+                            "host": ["{{base_url}}"],
+                            "path": ["auth", "refresh", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Profile",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/auth/profile/",
+                            "host": ["{{base_url}}"],
+                            "path": ["auth", "profile", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Update Profile",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"email\": \"newemail@example.com\",\n    \"mobile\": \"9876543211\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/profile/",
+                            "host": ["{{base_url}}"],
+                            "path": ["auth", "profile", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Change Password",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"old_password\": \"current_password\",\n    \"new_password\": \"new_secure_password\",\n    \"confirm_password\": \"new_secure_password\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/change-password/",
+                            "host": ["{{base_url}}"],
+                            "path": ["auth", "change-password", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Sessions",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/auth/sessions/",
+                            "host": ["{{base_url}}"],
+                            "path": ["auth", "sessions", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Register Merchant (Admin)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"username\": \"new_merchant\",\n    \"email\": \"merchant@example.com\",\n    \"password\": \"SecurePass123!\",\n    \"confirm_password\": \"SecurePass123!\",\n    \"mobile\": \"9876543210\",\n    \"client_code\": \"MERC002\",\n    \"merchant_name\": \"XYZ Traders\",\n    \"allowed_zones\": [\"NORTH\", \"SOUTH\"]\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/auth/register/merchant/",
+                            "host": ["{{base_url}}"],
+                            "path": ["auth", "register", "merchant", ""]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "2. Merchant Transactions",
+            "item": [
+                {
+                    "name": "Get Merchant Transaction History",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/merchant-history/?date_from=2024-01-01&date_to=2024-01-31&status=SUCCESS&page=1&page_size=100",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "merchant-history", ""],
+                            "query": [
+                                {
+                                    "key": "date_from",
+                                    "value": "2024-01-01"
+                                },
+                                {
+                                    "key": "date_to",
+                                    "value": "2024-01-31"
+                                },
+                                {
+                                    "key": "status",
+                                    "value": "SUCCESS"
+                                },
+                                {
+                                    "key": "page",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "page_size",
+                                    "value": "100"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Merchant History (Bit Mode)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/merchant-history-bit/",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "merchant-history-bit", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Merchant History (Whole Mode)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/merchant-history-whole/",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "merchant-history-whole", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Generate Merchant Excel Report",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"format\": \"excel\",\n    \"date_from\": \"2024-01-01\",\n    \"date_to\": \"2024-01-31\",\n    \"email_to\": \"merchant@example.com\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/transactions/merchant-history-excel/",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "merchant-history-excel", ""]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "3. Admin Transactions",
+            "item": [
+                {
+                    "name": "Get Admin Transaction History",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/admin-history/?client_code=MERC001",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "admin-history", ""],
+                            "query": [
+                                {
+                                    "key": "client_code",
+                                    "value": "MERC001"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Admin History (Bit Mode)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/admin-history-bit/",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "admin-history-bit", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Admin History (Whole Mode)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/admin-history-whole/",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "admin-history-whole", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Generate Admin Excel Report",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"format\": \"excel\",\n    \"date_from\": \"2024-01-01\",\n    \"date_to\": \"2024-01-31\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/transactions/admin-history-excel/",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "admin-history-excel", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Admin Export History",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/admin-export-history/",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "admin-export-history", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Get QF Wise History",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/qf-wise-history/?qf_type=payment_mode&qf_value=UPI",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "qf-wise-history", ""],
+                            "query": [
+                                {
+                                    "key": "qf_type",
+                                    "value": "payment_mode"
+                                },
+                                {
+                                    "key": "qf_value",
+                                    "value": "UPI"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "4. Settlements",
+            "item": [
+                {
+                    "name": "Get Settled Transaction History",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/settlements/settled-history/",
+                            "host": ["{{base_url}}"],
+                            "path": ["settlements", "settled-history", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Generate Settlement Excel",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"date_from\": \"2024-01-01\",\n    \"date_to\": \"2024-01-31\",\n    \"settlement_status\": \"COMPLETED\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/settlements/settled-excel/",
+                            "host": ["{{base_url}}"],
+                            "path": ["settlements", "settled-excel", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Generate Settlement Excel V2",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"date_from\": \"2024-01-01\",\n    \"date_to\": \"2024-01-31\",\n    \"include_charts\": true\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/settlements/settled-excel-v2/",
+                            "host": ["{{base_url}}"],
+                            "path": ["settlements", "settled-excel-v2", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Settled Grouped View",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/settlements/grouped-view/?group_by=date",
+                            "host": ["{{base_url}}"],
+                            "path": ["settlements", "grouped-view", ""],
+                            "query": [
+                                {
+                                    "key": "group_by",
+                                    "value": "date"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get QF Wise Settled History",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/settlements/qf-wise-settled/?qf_type=payment_mode&qf_value=UPI",
+                            "host": ["{{base_url}}"],
+                            "path": ["settlements", "qf-wise-settled", ""],
+                            "query": [
+                                {
+                                    "key": "qf_type",
+                                    "value": "payment_mode"
+                                },
+                                {
+                                    "key": "qf_value",
+                                    "value": "UPI"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Initiate Reconciliation",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"date_from\": \"2024-01-01\",\n    \"date_to\": \"2024-01-31\",\n    \"reconciliation_type\": \"THREE_WAY\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/settlements/reconciliation/",
+                            "host": ["{{base_url}}"],
+                            "path": ["settlements", "reconciliation", ""]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "5. Bank Integration",
+            "item": [
+                {
+                    "name": "Get DOITC Settled History",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/doitc-settled-history/",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "doitc-settled-history", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Get DOITC Merchant History",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/doitc-merchant-history/?merchant_code=DOITC001",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "doitc-merchant-history", ""],
+                            "query": [
+                                {
+                                    "key": "merchant_code",
+                                    "value": "DOITC001"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get SBI Card Data",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/sbi-card-data/",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "sbi-card-data", ""]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "6. Financial Management",
+            "item": [
+                {
+                    "name": "Get Refund History",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/settlements/refund-history/",
+                            "host": ["{{base_url}}"],
+                            "path": ["settlements", "refund-history", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Chargeback History",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/settlements/chargeback-history/",
+                            "host": ["{{base_url}}"],
+                            "path": ["settlements", "chargeback-history", ""]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "7. Analytics",
+            "item": [
+                {
+                    "name": "Get Success Graph",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/success-graph/?days=7",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "success-graph", ""],
+                            "query": [
+                                {
+                                    "key": "days",
+                                    "value": "7"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Merchant Whitelist",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/merchant-whitelist/",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "merchant-whitelist", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Add to Whitelist",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"client_code\": \"MERC002\",\n    \"ip_address\": \"203.192.45.68\",\n    \"domain\": \"merchant2.example.com\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/transactions/merchant-whitelist/",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "merchant-whitelist", ""]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Transaction Summary",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/transactions/summary/?date_from=2024-01-01&date_to=2024-01-31",
+                            "host": ["{{base_url}}"],
+                            "path": ["transactions", "summary", ""],
+                            "query": [
+                                {
+                                    "key": "date_from",
+                                    "value": "2024-01-01"
+                                },
+                                {
+                                    "key": "date_to",
+                                    "value": "2024-01-31"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

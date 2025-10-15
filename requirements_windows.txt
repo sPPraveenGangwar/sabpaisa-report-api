@@ -1,0 +1,33 @@
+# Core Django
+Django==4.2.15
+djangorestframework==3.15.2
+djangorestframework-simplejwt==5.3.1
+django-cors-headers==4.4.0
+python-decouple==3.8
+
+# Database - Use ONE of these options:
+# Option 1: mysqlclient (recommended, but may need Visual C++ on Windows)
+# mysqlclient==2.2.4
+
+# Option 2: PyMySQL (easier to install on Windows)
+PyMySQL==1.1.1
+
+# API Documentation
+drf-spectacular==0.27.2
+
+# Data Processing
+pandas==2.2.2
+openpyxl==3.1.5
+XlsxWriter==3.2.0
+
+# Async Tasks (optional for development)
+celery==5.4.0
+redis==5.0.8
+
+# Utilities
+python-dateutil==2.9.0
+pytz==2024.1
+
+# Development tools (optional)
+django-debug-toolbar==4.4.6
+ipython==8.26.0
