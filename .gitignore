@@ -33,11 +33,10 @@ env/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-media/
+
 staticfiles/
 
 # Environment variables
-.env
 .env.local
 
 # VS Code
@@ -71,8 +70,7 @@ dump.rdb
 *.xlsx
 *.csv
 *.pdf
-exports/
-reports/
+
 
 # AWS
 .aws/
