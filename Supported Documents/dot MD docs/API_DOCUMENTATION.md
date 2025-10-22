@@ -2,7 +2,7 @@
 
 **Version**: 1.1.0
 **Last Updated**: October 14, 2025
-**Base URL**: `http://localhost:8000/api/v1/`
+**Base URL**: `http://13.127.244.103:8000/api/v1/`
 
 > **🆕 What's New in v1.1.0**: Added System Monitoring APIs and Enhanced Response Headers (see Section 6.7 and 9)
 
@@ -77,7 +77,7 @@ Four new endpoints added under `/api/v1/system/` for system monitoring:
 **Example:**
 ```javascript
 // Check system health (no auth required)
-const response = await fetch('http://localhost:8000/api/v1/system/health/');
+const response = await fetch('http://13.127.244.103:8000/api/v1/system/health/');
 const health = await response.json();
 
 if (health.status === 'unhealthy') {
@@ -433,7 +433,7 @@ python manage.py runserver 0.0.0.0:9000
 
 **Test 1: Health Check**
 ```bash
-curl http://localhost:8000/api/v1/auth/health/
+curl http://13.127.244.103:8000/api/v1/auth/health/
 ```
 
 **Expected Response:**
@@ -451,9 +451,9 @@ curl http://localhost:8000/api/v1/auth/health/
 **Test 2: API Documentation**
 
 Open in browser:
-- Swagger UI: http://localhost:8000/api/docs/
-- ReDoc: http://localhost:8000/api/redoc/
-- OpenAPI Schema: http://localhost:8000/api/schema/
+- Swagger UI: http://13.127.244.103:8000/api/docs/
+- ReDoc: http://13.127.244.103:8000/api/redoc/
+- OpenAPI Schema: http://13.127.244.103:8000/api/schema/
 
 ---
 
@@ -481,7 +481,7 @@ All APIs use **JWT (JSON Web Tokens)** for authentication.
 
 **Request (cURL):**
 ```bash
-curl -X POST http://localhost:8000/api/v1/auth/login/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/login/ \
   -H "Content-Type: application/json" \
   -d '{
     "username": "srssuperadmin@sp",
@@ -496,7 +496,7 @@ $body = @{
     password = "Admin@123"
 } | ConvertTo-Json
 
-Invoke-RestMethod -Method Post -Uri "http://localhost:8000/api/v1/auth/login/" `
+Invoke-RestMethod -Method Post -Uri "http://13.127.244.103:8000/api/v1/auth/login/" `
     -ContentType "application/json" `
     -Body $body
 ```
@@ -526,7 +526,7 @@ Invoke-RestMethod -Method Post -Uri "http://localhost:8000/api/v1/auth/login/" `
 **Add to Authorization header in ALL subsequent requests:**
 
 ```bash
-curl -X GET http://localhost:8000/api/v1/transactions/admin-history/ \
+curl -X GET http://13.127.244.103:8000/api/v1/transactions/admin-history/ \
   -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGc..." \
   -H "Content-Type: application/json"
 ```
@@ -537,7 +537,7 @@ curl -X GET http://localhost:8000/api/v1/transactions/admin-history/ \
 
 **Request:**
 ```bash
-curl -X POST http://localhost:8000/api/v1/auth/refresh/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/refresh/ \
   -H "Content-Type: application/json" \
   -d '{
     "refresh": "eyJ0eXAiOiJKV1QiLCJhbGc..."
@@ -557,7 +557,7 @@ curl -X POST http://localhost:8000/api/v1/auth/refresh/ \
 **Endpoint:** `POST /api/v1/auth/logout/`
 
 ```bash
-curl -X POST http://localhost:8000/api/v1/auth/logout/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/logout/ \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -569,7 +569,7 @@ curl -X POST http://localhost:8000/api/v1/auth/logout/ \
 
 ## 📚 API Endpoints
 
-**Base URL:** `http://localhost:8000/api/v1/`
+**Base URL:** `http://13.127.244.103:8000/api/v1/`
 
 **All endpoints require authentication unless specified**
 
@@ -592,7 +592,7 @@ curl -X POST http://localhost:8000/api/v1/auth/logout/ \
 
 **Copy-Paste cURL:**
 ```bash
-curl -X POST http://localhost:8000/api/v1/auth/login/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/login/ \
   -H "Content-Type: application/json" \
   -d '{"username":"srssuperadmin@sp","password":"Admin@123"}'
 ```
@@ -604,7 +604,7 @@ curl -X POST http://localhost:8000/api/v1/auth/login/ \
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET http://localhost:8000/api/v1/auth/profile/ \
+curl -X GET http://13.127.244.103:8000/api/v1/auth/profile/ \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -637,7 +637,7 @@ curl -X GET http://localhost:8000/api/v1/auth/profile/ \
 
 **Copy-Paste cURL:**
 ```bash
-curl -X POST http://localhost:8000/api/v1/auth/change-password/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/change-password/ \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"old_password":"OldPassword123","new_password":"NewPassword456"}'
@@ -666,25 +666,25 @@ curl -X POST http://localhost:8000/api/v1/auth/change-password/ \
 
 **Example 1: Get Today's Transactions (Default - Fast!)**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/transactions/admin-history/?page=1&page_size=100" \
+curl -X GET "http://13.127.244.103:8000/api/v1/transactions/admin-history/?page=1&page_size=100" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 **Example 2: Get Specific Date Range**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/transactions/admin-history/?date_from=2025-10-01&date_to=2025-10-08&page=1&page_size=100" \
+curl -X GET "http://13.127.244.103:8000/api/v1/transactions/admin-history/?date_from=2025-10-01&date_to=2025-10-08&page=1&page_size=100" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 **Example 3: Filter by Status and Payment Mode**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/transactions/admin-history/?date_from=2025-10-01&date_to=2025-10-08&status=SUCCESS&payment_mode=UPI&page=1" \
+curl -X GET "http://13.127.244.103:8000/api/v1/transactions/admin-history/?date_from=2025-10-01&date_to=2025-10-08&status=SUCCESS&payment_mode=UPI&page=1" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
 **Example 4: Search by Transaction ID or Mobile Number**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/transactions/admin-history/?search=9876543210&page=1" \
+curl -X GET "http://13.127.244.103:8000/api/v1/transactions/admin-history/?search=9876543210&page=1" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -694,7 +694,7 @@ curl -X GET "http://localhost:8000/api/v1/transactions/admin-history/?search=987
   "success": true,
   "count": 239006,
   "filter_summary": "From 2025-10-01 to 2025-10-08",
-  "next": "http://localhost:8000/api/v1/transactions/admin-history/?page=2",
+  "next": "http://13.127.244.103:8000/api/v1/transactions/admin-history/?page=2",
   "previous": null,
   "results": [
     {
@@ -733,7 +733,7 @@ curl -X GET "http://localhost:8000/api/v1/transactions/admin-history/?search=987
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/transactions/merchant-history/?date_from=2025-10-01&date_to=2025-10-08&page=1" \
+curl -X GET "http://13.127.244.103:8000/api/v1/transactions/merchant-history/?date_from=2025-10-01&date_to=2025-10-08&page=1" \
   -H "Authorization: Bearer MERCHANT_ACCESS_TOKEN"
 ```
 
@@ -746,7 +746,7 @@ curl -X GET "http://localhost:8000/api/v1/transactions/merchant-history/?date_fr
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/transactions/summary/?date_from=2025-10-01&date_to=2025-10-08" \
+curl -X GET "http://13.127.244.103:8000/api/v1/transactions/summary/?date_from=2025-10-01&date_to=2025-10-08" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -776,7 +776,7 @@ curl -X GET "http://localhost:8000/api/v1/transactions/summary/?date_from=2025-1
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/transactions/admin-history-excel/?date_from=2025-10-01&date_to=2025-10-08" \
+curl -X GET "http://13.127.244.103:8000/api/v1/transactions/admin-history-excel/?date_from=2025-10-01&date_to=2025-10-08" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   --output transactions.xlsx
 ```
@@ -792,7 +792,7 @@ curl -X GET "http://localhost:8000/api/v1/transactions/admin-history-excel/?date
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/transactions/success-graph/?date_from=2025-10-01&date_to=2025-10-08" \
+curl -X GET "http://13.127.244.103:8000/api/v1/transactions/success-graph/?date_from=2025-10-01&date_to=2025-10-08" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -836,7 +836,7 @@ curl -X GET "http://localhost:8000/api/v1/transactions/success-graph/?date_from=
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/settlements/settled-history/?date_from=2025-10-01&date_to=2025-10-08&page=1" \
+curl -X GET "http://13.127.244.103:8000/api/v1/settlements/settled-history/?date_from=2025-10-01&date_to=2025-10-08&page=1" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -871,7 +871,7 @@ curl -X GET "http://localhost:8000/api/v1/settlements/settled-history/?date_from
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/settlements/grouped-view/?settlement_date_from=2025-10-01&settlement_date_to=2025-10-08" \
+curl -X GET "http://13.127.244.103:8000/api/v1/settlements/grouped-view/?settlement_date_from=2025-10-01&settlement_date_to=2025-10-08" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -900,7 +900,7 @@ curl -X GET "http://localhost:8000/api/v1/settlements/grouped-view/?settlement_d
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/settlements/refund-history/?date_from=2025-10-01&date_to=2025-10-08" \
+curl -X GET "http://13.127.244.103:8000/api/v1/settlements/refund-history/?date_from=2025-10-01&date_to=2025-10-08" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -929,7 +929,7 @@ curl -X GET "http://localhost:8000/api/v1/settlements/refund-history/?date_from=
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/settlements/chargeback-history/?date_from=2025-10-01&date_to=2025-10-08" \
+curl -X GET "http://13.127.244.103:8000/api/v1/settlements/chargeback-history/?date_from=2025-10-01&date_to=2025-10-08" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -940,7 +940,7 @@ curl -X GET "http://localhost:8000/api/v1/settlements/chargeback-history/?date_f
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/settlements/settled-excel/?date_from=2025-10-01&date_to=2025-10-08" \
+curl -X GET "http://13.127.244.103:8000/api/v1/settlements/settled-excel/?date_from=2025-10-01&date_to=2025-10-08" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   --output settlements.xlsx
 ```
@@ -956,7 +956,7 @@ curl -X GET "http://localhost:8000/api/v1/settlements/settled-excel/?date_from=2
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/analytics/merchant-analytics/?date_from=2025-10-01&date_to=2025-10-08" \
+curl -X GET "http://13.127.244.103:8000/api/v1/analytics/merchant-analytics/?date_from=2025-10-01&date_to=2025-10-08" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -1010,7 +1010,7 @@ curl -X GET "http://localhost:8000/api/v1/analytics/merchant-analytics/?date_fro
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/analytics/payment-mode-analytics/?date_from=2025-10-01&date_to=2025-10-08" \
+curl -X GET "http://13.127.244.103:8000/api/v1/analytics/payment-mode-analytics/?date_from=2025-10-01&date_to=2025-10-08" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -1021,7 +1021,7 @@ curl -X GET "http://localhost:8000/api/v1/analytics/payment-mode-analytics/?date
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/analytics/settlement-analytics/?date_from=2025-10-01&date_to=2025-10-08" \
+curl -X GET "http://13.127.244.103:8000/api/v1/analytics/settlement-analytics/?date_from=2025-10-01&date_to=2025-10-08" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -1032,7 +1032,7 @@ curl -X GET "http://localhost:8000/api/v1/analytics/settlement-analytics/?date_f
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/analytics/refund-chargeback/?date_from=2025-10-01&date_to=2025-10-08" \
+curl -X GET "http://13.127.244.103:8000/api/v1/analytics/refund-chargeback/?date_from=2025-10-01&date_to=2025-10-08" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -1045,7 +1045,7 @@ curl -X GET "http://localhost:8000/api/v1/analytics/refund-chargeback/?date_from
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/analytics/comparative/?current_date_from=2025-10-01&current_date_to=2025-10-08&previous_date_from=2025-09-24&previous_date_to=2025-09-30" \
+curl -X GET "http://13.127.244.103:8000/api/v1/analytics/comparative/?current_date_from=2025-10-01&current_date_to=2025-10-08&previous_date_from=2025-09-24&previous_date_to=2025-09-30" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -1056,7 +1056,7 @@ curl -X GET "http://localhost:8000/api/v1/analytics/comparative/?current_date_fr
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/analytics/executive-dashboard/?date_from=2025-10-01&date_to=2025-10-08" \
+curl -X GET "http://13.127.244.103:8000/api/v1/analytics/executive-dashboard/?date_from=2025-10-01&date_to=2025-10-08" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -1085,7 +1085,7 @@ curl -X GET "http://localhost:8000/api/v1/analytics/executive-dashboard/?date_fr
 
 **Copy-Paste cURL:**
 ```bash
-curl -X POST "http://localhost:8000/api/v1/reports/generate/" \
+curl -X POST "http://13.127.244.103:8000/api/v1/reports/generate/" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1122,7 +1122,7 @@ curl -X POST "http://localhost:8000/api/v1/reports/generate/" \
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/reports/status/abc123-def456-ghi789/" \
+curl -X GET "http://13.127.244.103:8000/api/v1/reports/status/abc123-def456-ghi789/" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -1143,7 +1143,7 @@ curl -X GET "http://localhost:8000/api/v1/reports/status/abc123-def456-ghi789/" 
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/reports/download/abc123-def456-ghi789/" \
+curl -X GET "http://13.127.244.103:8000/api/v1/reports/download/abc123-def456-ghi789/" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
   --output report.xlsx
 ```
@@ -1155,7 +1155,7 @@ curl -X GET "http://localhost:8000/api/v1/reports/download/abc123-def456-ghi789/
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/reports/list/?page=1" \
+curl -X GET "http://13.127.244.103:8000/api/v1/reports/list/?page=1" \
   -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
 ```
 
@@ -1168,7 +1168,7 @@ curl -X GET "http://localhost:8000/api/v1/reports/list/?page=1" \
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/qwikforms/transactions/?qf_id=QF12345&date_from=2025-10-01" \
+curl -X GET "http://13.127.244.103:8000/api/v1/qwikforms/transactions/?qf_id=QF12345&date_from=2025-10-01" \
   -H "Authorization: Bearer ADMIN_ACCESS_TOKEN"
 ```
 
@@ -1179,7 +1179,7 @@ curl -X GET "http://localhost:8000/api/v1/qwikforms/transactions/?qf_id=QF12345&
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/qwikforms/settlements/?qf_id=QF12345" \
+curl -X GET "http://13.127.244.103:8000/api/v1/qwikforms/settlements/?qf_id=QF12345" \
   -H "Authorization: Bearer ADMIN_ACCESS_TOKEN"
 ```
 
@@ -1190,7 +1190,7 @@ curl -X GET "http://localhost:8000/api/v1/qwikforms/settlements/?qf_id=QF12345" 
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/qwikforms/analytics/?qf_id=QF12345&date_from=2025-10-01&date_to=2025-10-08" \
+curl -X GET "http://13.127.244.103:8000/api/v1/qwikforms/analytics/?qf_id=QF12345&date_from=2025-10-01&date_to=2025-10-08" \
   -H "Authorization: Bearer ADMIN_ACCESS_TOKEN"
 ```
 
@@ -1209,7 +1209,7 @@ curl -X GET "http://localhost:8000/api/v1/qwikforms/analytics/?qf_id=QF12345&dat
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET http://localhost:8000/api/v1/system/health/
+curl -X GET http://13.127.244.103:8000/api/v1/system/health/
 ```
 
 **Response:**
@@ -1270,7 +1270,7 @@ curl -X GET http://localhost:8000/api/v1/system/health/
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET http://localhost:8000/api/v1/system/metrics/ \
+curl -X GET http://13.127.244.103:8000/api/v1/system/metrics/ \
   -H "Authorization: Bearer ADMIN_ACCESS_TOKEN"
 ```
 
@@ -1328,7 +1328,7 @@ curl -X GET http://localhost:8000/api/v1/system/metrics/ \
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET http://localhost:8000/api/v1/system/database/status/ \
+curl -X GET http://13.127.244.103:8000/api/v1/system/database/status/ \
   -H "Authorization: Bearer ADMIN_ACCESS_TOKEN"
 ```
 
@@ -1392,7 +1392,7 @@ curl -X GET http://localhost:8000/api/v1/system/database/status/ \
 
 **Copy-Paste cURL:**
 ```bash
-curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?limit=50" \
+curl -X GET "http://13.127.244.103:8000/api/v1/system/audit-logs/?limit=50" \
   -H "Authorization: Bearer ADMIN_ACCESS_TOKEN"
 ```
 
@@ -1605,7 +1605,7 @@ if (remaining < limit * 0.1) {
 
 **Request:**
 ```bash
-curl -X GET http://localhost:8000/api/v1/transactions/admin-history/ \
+curl -X GET http://13.127.244.103:8000/api/v1/transactions/admin-history/ \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -I
 ```
@@ -1680,7 +1680,7 @@ async function callAPI(url, options = {}) {
 }
 
 // Usage
-const result = await callAPI('http://localhost:8000/api/v1/transactions/admin-history/');
+const result = await callAPI('http://13.127.244.103:8000/api/v1/transactions/admin-history/');
 console.log('Data:', result.data);
 console.log('Request ID for debugging:', result.headers.requestId);
 ```
@@ -1737,11 +1737,11 @@ export class ApiHeadersInterceptor implements HttpInterceptor {
 
 ```bash
 # View all response headers
-curl -I http://localhost:8000/api/v1/transactions/admin-history/ \
+curl -I http://13.127.244.103:8000/api/v1/transactions/admin-history/ \
   -H "Authorization: Bearer YOUR_TOKEN"
 
 # View specific header
-curl -X GET http://localhost:8000/api/v1/transactions/admin-history/ \
+curl -X GET http://13.127.244.103:8000/api/v1/transactions/admin-history/ \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -D - -o /dev/null | grep "X-Request-ID"
 ```
@@ -1801,7 +1801,7 @@ DB_PRIMARY_NAME=sabpaisa2
 
 **Use refresh token:**
 ```bash
-curl -X POST http://localhost:8000/api/v1/auth/refresh/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/refresh/ \
   -H "Content-Type: application/json" \
   -d '{"refresh": "YOUR_REFRESH_TOKEN"}'
 ```
@@ -1845,8 +1845,8 @@ python manage.py runserver
 ## 📚 Additional Resources
 
 ### Interactive API Documentation:
-- **Swagger UI**: http://localhost:8000/api/docs/
-- **ReDoc**: http://localhost:8000/api/redoc/
+- **Swagger UI**: http://13.127.244.103:8000/api/docs/
+- **ReDoc**: http://13.127.244.103:8000/api/redoc/
 
 ### Performance Documentation:
 - `REDIS_VERIFICATION_REPORT.md` - Redis cache verification
@@ -1872,7 +1872,7 @@ python manage.py runserver
 - [ ] Migrations run (`python manage.py migrate`)
 - [ ] Superuser created (`python manage.py createsuperuser`)
 - [ ] Server running (`python manage.py runserver`)
-- [ ] Health check passed (http://localhost:8000/api/v1/auth/health/)
+- [ ] Health check passed (http://13.127.244.103:8000/api/v1/auth/health/)
 - [ ] Successfully logged in and got JWT token
 - [ ] Tested first API call
 
@@ -1882,7 +1882,7 @@ python manage.py runserver
 
 For issues or questions:
 1. Check [Troubleshooting](#-troubleshooting) section
-2. Review API docs: http://localhost:8000/api/docs/
+2. Review API docs: http://13.127.244.103:8000/api/docs/
 3. Check application logs
 4. Contact technical team
 
@@ -1929,7 +1929,7 @@ For issues or questions:
 
 **For Issues:**
 1. Check [Troubleshooting](#-troubleshooting) section
-2. Review API docs: http://localhost:8000/api/docs/
+2. Review API docs: http://13.127.244.103:8000/api/docs/
 3. Check application logs
 4. Contact backend team with X-Request-ID from error
 

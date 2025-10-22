@@ -427,13 +427,13 @@ free -h
 ### Health Checks
 ```bash
 # Application health
-curl http://localhost:8000/api/v1/system/health/
+curl http://13.127.244.103:8000/api/v1/system/health/
 
 # Database health
-curl http://localhost:8000/api/v1/system/database-status/
+curl http://13.127.244.103:8000/api/v1/system/database-status/
 
 # Full system status
-curl http://localhost:8000/api/v1/system/status/
+curl http://13.127.244.103:8000/api/v1/system/status/
 ```
 
 ---

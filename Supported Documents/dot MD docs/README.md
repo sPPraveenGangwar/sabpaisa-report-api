@@ -247,8 +247,8 @@ The project includes VS Code configurations for:
 ## 📝 API Documentation
 
 Interactive API documentation available at:
-- Swagger UI: `http://localhost:8000/api/docs/`
-- ReDoc: `http://localhost:8000/api/redoc/`
+- Swagger UI: `http://13.127.244.103:8000/api/docs/`
+- ReDoc: `http://13.127.244.103:8000/api/redoc/`
 
 ## 🏗️ Project Structure
 

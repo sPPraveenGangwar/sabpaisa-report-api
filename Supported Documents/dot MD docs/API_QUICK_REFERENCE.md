@@ -205,12 +205,12 @@ POST /api/v1/auth/refresh/
 ### cURL Example
 ```bash
 # Login
-curl -X POST http://localhost:8000/api/v1/auth/login/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/login/ \
   -H "Content-Type: application/json" \
   -d '{"username": "admin", "password": "password"}'
 
 # Get Transactions
-curl -X GET http://localhost:8000/api/v1/transactions/merchant-history/ \
+curl -X GET http://13.127.244.103:8000/api/v1/transactions/merchant-history/ \
   -H "Authorization: Bearer <token>"
 ```
 
@@ -220,7 +220,7 @@ import requests
 
 # Login
 response = requests.post(
-    "http://localhost:8000/api/v1/auth/login/",
+    "http://13.127.244.103:8000/api/v1/auth/login/",
     json={"username": "admin", "password": "password"}
 )
 tokens = response.json()["data"]
@@ -228,7 +228,7 @@ tokens = response.json()["data"]
 # Use token
 headers = {"Authorization": f"Bearer {tokens['access']}"}
 transactions = requests.get(
-    "http://localhost:8000/api/v1/transactions/merchant-history/",
+    "http://13.127.244.103:8000/api/v1/transactions/merchant-history/",
     headers=headers
 )
 ```
@@ -236,7 +236,7 @@ transactions = requests.get(
 ### JavaScript Example
 ```javascript
 // Login
-const loginResponse = await fetch('http://localhost:8000/api/v1/auth/login/', {
+const loginResponse = await fetch('http://13.127.244.103:8000/api/v1/auth/login/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username: 'admin', password: 'password' })
@@ -244,7 +244,7 @@ const loginResponse = await fetch('http://localhost:8000/api/v1/auth/login/', {
 const { data } = await loginResponse.json();
 
 // Use token
-const transactions = await fetch('http://localhost:8000/api/v1/transactions/merchant-history/', {
+const transactions = await fetch('http://13.127.244.103:8000/api/v1/transactions/merchant-history/', {
     headers: { 'Authorization': `Bearer ${data.access}` }
 });
 ```
@@ -296,7 +296,7 @@ GET /api/v1/reports/status/{task_id}/
 ## 📞 Support
 
 - **Email:** api-support@sabpaisa.com
-- **Documentation:** http://localhost:8000/api/docs/
+- **Documentation:** http://13.127.244.103:8000/api/docs/
 - **Postman Collection:** Import `SabPaisa_API_Collection.postman_collection.json`
 
 ---

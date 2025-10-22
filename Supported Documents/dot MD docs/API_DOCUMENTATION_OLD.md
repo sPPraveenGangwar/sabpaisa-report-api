@@ -20,7 +20,7 @@
 
 ### Base URL
 ```
-Development: http://localhost:8000/api/v1
+Development: http://13.127.244.103:8000/api/v1
 ```
 
 ### Database
@@ -394,7 +394,7 @@ page_size=100
     "count": 1543,
     "total_pages": 16,
     "current_page": 1,
-    "next": "http://localhost:8000/api/v1/transactions/merchant-history/?page=2",
+    "next": "http://13.127.244.103:8000/api/v1/transactions/merchant-history/?page=2",
     "previous": null,
     "page_size": 100,
     "results": [
@@ -1303,14 +1303,14 @@ X-RateLimit-Reset: 1643723400
 
 #### Login:
 ```bash
-curl -X POST http://localhost:8000/api/v1/auth/login/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/login/ \
   -H "Content-Type: application/json" \
   -d '{"username": "admin", "password": "password"}'
 ```
 
 #### Get Transactions:
 ```bash
-curl -X GET http://localhost:8000/api/v1/transactions/merchant-history/ \
+curl -X GET http://13.127.244.103:8000/api/v1/transactions/merchant-history/ \
   -H "Authorization: Bearer <access_token>" \
   -H "Content-Type: application/json"
 ```
@@ -1322,7 +1322,7 @@ import requests
 
 # Login
 login_response = requests.post(
-    "http://localhost:8000/api/v1/auth/login/",
+    "http://13.127.244.103:8000/api/v1/auth/login/",
     json={"username": "admin", "password": "password"}
 )
 tokens = login_response.json()["data"]
@@ -1330,7 +1330,7 @@ tokens = login_response.json()["data"]
 # Get transactions
 headers = {"Authorization": f"Bearer {tokens['access']}"}
 transactions = requests.get(
-    "http://localhost:8000/api/v1/transactions/merchant-history/",
+    "http://13.127.244.103:8000/api/v1/transactions/merchant-history/",
     headers=headers
 )
 print(transactions.json())
