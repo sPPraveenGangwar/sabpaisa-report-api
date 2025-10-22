@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # ===============================================
-# Environment Switcher Script
+# Environment Switcher Script - Backend Only
 # Switches between different environment configurations
 # ===============================================
 
@@ -42,22 +42,15 @@ fi
 
 echo -e "${GREEN}Switching to $ENV environment...${NC}"
 
-# Backend environment
-BACKEND_DIR="./sabpaisa-report-api"
-if [ -f "$BACKEND_DIR/.env.$ENV" ]; then
-    cp "$BACKEND_DIR/.env.$ENV" "$BACKEND_DIR/.env"
+# Check if we're in the backend directory or need to find it
+if [ -f ".env.$ENV" ]; then
+    # We're in the backend directory
+    cp ".env.$ENV" ".env"
     echo -e "${GREEN}✓ Backend environment set to $ENV${NC}"
+    echo -e "${GREEN}✓ Copied .env.$ENV to .env${NC}"
 else
-    echo -e "${RED}✗ Backend .env.$ENV not found${NC}"
-fi
-
-# Frontend environment
-FRONTEND_DIR="./sabpaisa-report-ui"
-if [ -f "$FRONTEND_DIR/.env.$ENV" ]; then
-    cp "$FRONTEND_DIR/.env.$ENV" "$FRONTEND_DIR/.env"
-    echo -e "${GREEN}✓ Frontend environment set to $ENV${NC}"
-else
-    echo -e "${RED}✗ Frontend .env.$ENV not found${NC}"
+    echo -e "${RED}✗ .env.$ENV not found in current directory${NC}"
+    exit 1
 fi
 
 echo ""

@@ -27,6 +27,16 @@ fi
 echo -e "${GREEN}[INFO] Pulling latest changes from ${CURRENT_BRANCH}...${NC}"
 git pull origin ${CURRENT_BRANCH}
 
+# Verify .env file exists
+if [ ! -f ".env" ]; then
+    echo -e "${RED}[ERROR] .env file not found!${NC}"
+    echo -e "${YELLOW}[INFO] This should have been created by switch-env.sh${NC}"
+    exit 1
+fi
+
+echo -e "${GREEN}[INFO] Using environment file: .env${NC}"
+echo -e "${YELLOW}[INFO] ALLOWED_HOSTS: $(grep ALLOWED_HOSTS .env)${NC}"
+
 # Build and restart Docker containers
 echo -e "${GREEN}[INFO] Building Docker containers...${NC}"
 docker-compose build --no-cache
