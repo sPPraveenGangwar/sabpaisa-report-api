@@ -144,7 +144,7 @@ User Request → Django → Redis Cache (10-50ms) → Response (50-100ms) ⚡
 ### 1. Test Cache Population
 ```powershell
 # Call an API endpoint to populate cache
-curl http://localhost:8000/api/v1/analytics/dashboard/?date_filter=today
+curl http://13.127.244.103:8000/api/v1/analytics/dashboard/?date_filter=today
 
 # Check cache keys created
 redis-cli KEYS "sabpaisa_*"
@@ -153,10 +153,10 @@ redis-cli KEYS "sabpaisa_*"
 ### 2. Test Cache Performance
 ```powershell
 # First request (Cache MISS - slower)
-Measure-Command { curl http://localhost:8000/api/v1/analytics/dashboard/?date_filter=today }
+Measure-Command { curl http://13.127.244.103:8000/api/v1/analytics/dashboard/?date_filter=today }
 
 # Second request (Cache HIT - much faster!)
-Measure-Command { curl http://localhost:8000/api/v1/analytics/dashboard/?date_filter=today }
+Measure-Command { curl http://13.127.244.103:8000/api/v1/analytics/dashboard/?date_filter=today }
 ```
 
 ### 3. Monitor Cache Usage

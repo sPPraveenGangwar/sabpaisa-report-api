@@ -348,7 +348,7 @@ pip install -r requirements.txt
 
 #### Test Authentication API
 ```bash
-curl -X POST http://localhost:8000/api/v1/auth/login/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/login/ \
   -H "Content-Type: application/json" \
   -d '{
     "username": "test@example.com",
@@ -368,7 +368,7 @@ X-RateLimit-Reset: <timestamp>
 
 #### Test Transactions API
 ```bash
-curl -X GET http://localhost:8000/api/v1/transactions/ \
+curl -X GET http://13.127.244.103:8000/api/v1/transactions/ \
   -H "Authorization: Bearer <token>"
 ```
 
@@ -376,7 +376,7 @@ curl -X GET http://localhost:8000/api/v1/transactions/ \
 
 #### Test Settlements API
 ```bash
-curl -X GET http://localhost:8000/api/v1/settlements/ \
+curl -X GET http://13.127.244.103:8000/api/v1/settlements/ \
   -H "Authorization: Bearer <token>"
 ```
 
@@ -384,7 +384,7 @@ curl -X GET http://localhost:8000/api/v1/settlements/ \
 
 #### Test Analytics API
 ```bash
-curl -X GET http://localhost:8000/api/v1/analytics/dashboard/ \
+curl -X GET http://13.127.244.103:8000/api/v1/analytics/dashboard/ \
   -H "Authorization: Bearer <token>"
 ```
 
@@ -396,14 +396,14 @@ curl -X GET http://localhost:8000/api/v1/analytics/dashboard/ \
 
 #### Test Health Check (Public)
 ```bash
-curl -X GET http://localhost:8000/api/v1/system/health/
+curl -X GET http://13.127.244.103:8000/api/v1/system/health/
 ```
 
 **Expected**: 200 OK with health status of all services.
 
 #### Test System Metrics (Admin Only)
 ```bash
-curl -X GET http://localhost:8000/api/v1/system/metrics/ \
+curl -X GET http://13.127.244.103:8000/api/v1/system/metrics/ \
   -H "Authorization: Bearer <admin_token>"
 ```
 
@@ -411,7 +411,7 @@ curl -X GET http://localhost:8000/api/v1/system/metrics/ \
 
 #### Test Database Status (Admin Only)
 ```bash
-curl -X GET http://localhost:8000/api/v1/system/database/status/ \
+curl -X GET http://13.127.244.103:8000/api/v1/system/database/status/ \
   -H "Authorization: Bearer <admin_token>"
 ```
 
@@ -419,7 +419,7 @@ curl -X GET http://localhost:8000/api/v1/system/database/status/ \
 
 #### Test Audit Logs (Admin Only)
 ```bash
-curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?limit=10" \
+curl -X GET "http://13.127.244.103:8000/api/v1/system/audit-logs/?limit=10" \
   -H "Authorization: Bearer <admin_token>"
 ```
 
@@ -431,7 +431,7 @@ curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?limit=10" \
 
 #### Check Headers in Any API Response
 ```bash
-curl -X GET http://localhost:8000/api/v1/transactions/ \
+curl -X GET http://13.127.244.103:8000/api/v1/transactions/ \
   -H "Authorization: Bearer <token>" \
   -I
 ```
@@ -566,8 +566,8 @@ sudo systemctl restart gunicorn  # Or your deployment method
 
 ### Update Swagger/OpenAPI Docs
 The new endpoints will automatically appear in the API documentation at:
-- Swagger UI: `http://localhost:8000/api/docs/`
-- ReDoc: `http://localhost:8000/api/redoc/`
+- Swagger UI: `http://13.127.244.103:8000/api/docs/`
+- ReDoc: `http://13.127.244.103:8000/api/redoc/`
 
 No manual updates needed - DRF Spectacular auto-generates documentation.
 
@@ -583,7 +583,7 @@ import time
 def check_system_health():
     """Check system health every 60 seconds"""
     while True:
-        response = requests.get('http://localhost:8000/api/v1/system/health/')
+        response = requests.get('http://13.127.244.103:8000/api/v1/system/health/')
         data = response.json()
 
         if data['status'] != 'healthy':

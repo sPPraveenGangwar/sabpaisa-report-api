@@ -138,16 +138,16 @@ Create endpoints that return mock data matching the API specification:
 ### Test Authentication (Working):
 ```bash
 # Login
-curl -X POST http://localhost:8000/api/v1/auth/login/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/login/ \
   -H "Content-Type: application/json" \
   -d '{"username": "test_user", "password": "password"}'
 
 # Get Profile
-curl -X GET http://localhost:8000/api/v1/auth/profile/ \
+curl -X GET http://13.127.244.103:8000/api/v1/auth/profile/ \
   -H "Authorization: Bearer <access_token>"
 
 # Change Password
-curl -X POST http://localhost:8000/api/v1/auth/change-password/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/change-password/ \
   -H "Authorization: Bearer <access_token>" \
   -H "Content-Type: application/json" \
   -d '{"old_password": "old", "new_password": "new", "confirm_password": "new"}'

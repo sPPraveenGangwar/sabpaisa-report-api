@@ -348,7 +348,7 @@ jobs:
 
           # Health check
           sleep 5
-          curl -f http://localhost:8000/api/v1/system/health/ || exit 1
+          curl -f http://13.127.244.103:8000/api/v1/system/health/ || exit 1
 
           echo "Deployment successful!"
           ENDSSH
@@ -496,7 +496,7 @@ jobs:
           # Health check
           sleep 5
           for i in {1..5}; do
-            if curl -f http://localhost:8000/api/v1/system/health/; then
+            if curl -f http://13.127.244.103:8000/api/v1/system/health/; then
               echo "Health check passed!"
               break
             fi

@@ -709,17 +709,17 @@ sabpaisa-reports-api/
 ### Interactive Documentation
 
 **Swagger UI** (Recommended)
-- URL: `http://localhost:8000/api/docs/`
+- URL: `http://13.127.244.103:8000/api/docs/`
 - Features: Try-it-out functionality, request/response examples
 - Authentication: JWT token support
 
 **ReDoc**
-- URL: `http://localhost:8000/api/redoc/`
+- URL: `http://13.127.244.103:8000/api/redoc/`
 - Features: Clean, searchable documentation
 - Export: OpenAPI spec download
 
 **Admin Panel**
-- URL: `http://localhost:8000/admin/`
+- URL: `http://13.127.244.103:8000/admin/`
 - Database management
 - User administration
 
@@ -1031,7 +1031,7 @@ sabpaisa-reports-api/
 
 **Contact Information:**
 - GitHub: [Repository Link]
-- Documentation: http://localhost:8000/api/docs/
+- Documentation: http://13.127.244.103:8000/api/docs/
 - Support: dev-team@sabpaisa.com
 
 **Key Takeaways:**

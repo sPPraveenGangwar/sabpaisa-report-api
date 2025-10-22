@@ -9,7 +9,7 @@
 
 ### Get Audit Access Token
 ```bash
-curl -X POST http://localhost:8000/api/v1/auth/login/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/login/ \
   -H "Content-Type: application/json" \
   -d '{"username":"auditor@sabpaisa.in","password":"AuditorPassword"}'
 ```
@@ -22,7 +22,7 @@ Save the `access` token for all subsequent requests.
 
 ### 1. Transaction Records (Last 12 Months)
 ```bash
-curl -X GET "http://localhost:8000/api/v1/transactions/admin-history-excel/?date_from=2024-01-01&date_to=2024-12-31" \
+curl -X GET "http://13.127.244.103:8000/api/v1/transactions/admin-history-excel/?date_from=2024-01-01&date_to=2024-12-31" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   --output rbi_transactions_2024.xlsx
 ```
@@ -30,7 +30,7 @@ curl -X GET "http://localhost:8000/api/v1/transactions/admin-history-excel/?date
 
 ### 2. Settlement Reconciliation
 ```bash
-curl -X GET "http://localhost:8000/api/v1/settlements/grouped-view/?settlement_date_from=2024-01-01&settlement_date_to=2024-12-31" \
+curl -X GET "http://13.127.244.103:8000/api/v1/settlements/grouped-view/?settlement_date_from=2024-01-01&settlement_date_to=2024-12-31" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   --output rbi_settlements_2024.json
 ```
@@ -38,7 +38,7 @@ curl -X GET "http://localhost:8000/api/v1/settlements/grouped-view/?settlement_d
 
 ### 3. Audit Trail
 ```bash
-curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?date_from=2024-01-01&limit=10000" \
+curl -X GET "http://13.127.244.103:8000/api/v1/system/audit-logs/?date_from=2024-01-01&limit=10000" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   --output rbi_audit_logs_2024.json
 ```
@@ -46,7 +46,7 @@ curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?date_from=2024-01-0
 
 ### 4. Refund & Chargebacks
 ```bash
-curl -X GET "http://localhost:8000/api/v1/settlements/refund-history/?date_from=2024-01-01" \
+curl -X GET "http://13.127.244.103:8000/api/v1/settlements/refund-history/?date_from=2024-01-01" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   --output rbi_refunds_2024.json
 ```
@@ -58,7 +58,7 @@ curl -X GET "http://localhost:8000/api/v1/settlements/refund-history/?date_from=
 
 ### 1. Authentication Logs
 ```bash
-curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?action=user_login&date_from=2024-01-01" \
+curl -X GET "http://13.127.244.103:8000/api/v1/system/audit-logs/?action=user_login&date_from=2024-01-01" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   --output pcidss_auth_logs.json
 ```
@@ -66,7 +66,7 @@ curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?action=user_login&d
 
 ### 2. Access Control Matrix
 ```bash
-curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?action=data_access" \
+curl -X GET "http://13.127.244.103:8000/api/v1/system/audit-logs/?action=data_access" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   --output pcidss_access_logs.json
 ```
@@ -74,14 +74,14 @@ curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?action=data_access"
 
 ### 3. System Health & Monitoring
 ```bash
-curl -X GET "http://localhost:8000/api/v1/system/health/" \
+curl -X GET "http://13.127.244.103:8000/api/v1/system/health/" \
   --output pcidss_system_health.json
 ```
 **Evidence**: System availability (Req 11)
 
 ### 4. Security Configuration
 ```bash
-curl -I http://localhost:8000/api/v1/transactions/
+curl -I http://13.127.244.103:8000/api/v1/transactions/
 ```
 **Evidence**: Security headers (Req 6)
 - Check for: X-Frame-Options, X-Content-Type-Options, etc.

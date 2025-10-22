@@ -15,7 +15,7 @@ python manage.py runserver
 
 ### 2. Get Admin Token
 ```bash
-curl -X POST http://localhost:8000/api/v1/auth/login/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/login/ \
   -H "Content-Type: application/json" \
   -d '{
     "username": "admin@sabpaisa.in",
@@ -33,7 +33,7 @@ Save the token for subsequent requests.
 
 **Test 1: Login API**
 ```bash
-curl -X POST http://localhost:8000/api/v1/auth/login/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/login/ \
   -H "Content-Type: application/json" \
   -d '{"username": "test@example.com", "password": "test123"}'
 ```
@@ -44,7 +44,7 @@ curl -X POST http://localhost:8000/api/v1/auth/login/ \
 
 **Test 2: Transactions List**
 ```bash
-curl -X GET http://localhost:8000/api/v1/transactions/ \
+curl -X GET http://13.127.244.103:8000/api/v1/transactions/ \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 ✅ **Expected**: Response body structure **identical** to before
@@ -54,7 +54,7 @@ curl -X GET http://localhost:8000/api/v1/transactions/ \
 
 **Test 3: Settlements List**
 ```bash
-curl -X GET http://localhost:8000/api/v1/settlements/ \
+curl -X GET http://13.127.244.103:8000/api/v1/settlements/ \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 ✅ **Expected**: Response body structure **identical** to before
@@ -64,7 +64,7 @@ curl -X GET http://localhost:8000/api/v1/settlements/ \
 
 **Test 4: Analytics Dashboard**
 ```bash
-curl -X GET http://localhost:8000/api/v1/analytics/dashboard/ \
+curl -X GET http://13.127.244.103:8000/api/v1/analytics/dashboard/ \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 ✅ **Expected**: Response body structure **identical** to before
@@ -74,7 +74,7 @@ curl -X GET http://localhost:8000/api/v1/analytics/dashboard/ \
 
 **Test 5: Reports List**
 ```bash
-curl -X GET http://localhost:8000/api/v1/reports/ \
+curl -X GET http://13.127.244.103:8000/api/v1/reports/ \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 ✅ **Expected**: Response body structure **identical** to before
@@ -86,7 +86,7 @@ curl -X GET http://localhost:8000/api/v1/reports/ \
 
 ### New Endpoint 1: Health Check (Public)
 ```bash
-curl -X GET http://localhost:8000/api/v1/system/health/
+curl -X GET http://13.127.244.103:8000/api/v1/system/health/
 ```
 
 **Expected Response**:
@@ -114,7 +114,7 @@ curl -X GET http://localhost:8000/api/v1/system/health/
 
 ### New Endpoint 2: System Metrics (Admin Only)
 ```bash
-curl -X GET http://localhost:8000/api/v1/system/metrics/ \
+curl -X GET http://13.127.244.103:8000/api/v1/system/metrics/ \
   -H "Authorization: Bearer ADMIN_TOKEN"
 ```
 
@@ -136,7 +136,7 @@ curl -X GET http://localhost:8000/api/v1/system/metrics/ \
 
 ### New Endpoint 3: Database Status (Admin Only)
 ```bash
-curl -X GET http://localhost:8000/api/v1/system/database/status/ \
+curl -X GET http://13.127.244.103:8000/api/v1/system/database/status/ \
   -H "Authorization: Bearer ADMIN_TOKEN"
 ```
 
@@ -158,7 +158,7 @@ curl -X GET http://localhost:8000/api/v1/system/database/status/ \
 
 ### New Endpoint 4: Audit Logs (Admin Only)
 ```bash
-curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?limit=10" \
+curl -X GET "http://13.127.244.103:8000/api/v1/system/audit-logs/?limit=10" \
   -H "Authorization: Bearer ADMIN_TOKEN"
 ```
 
@@ -185,7 +185,7 @@ curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?limit=10" \
 
 ### Check Headers in Any Response
 ```bash
-curl -X GET http://localhost:8000/api/v1/transactions/ \
+curl -X GET http://13.127.244.103:8000/api/v1/transactions/ \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -I
 ```
@@ -283,7 +283,7 @@ urlpatterns = [
 ```bash
 # Run 100 requests and measure average response time
 for i in {1..100}; do
-  curl -X GET http://localhost:8000/api/v1/system/health/ -s -o /dev/null -w "%{time_total}\n"
+  curl -X GET http://13.127.244.103:8000/api/v1/system/health/ -s -o /dev/null -w "%{time_total}\n"
 done | awk '{sum+=$1; count++} END {print "Average:", sum/count, "seconds"}'
 ```
 

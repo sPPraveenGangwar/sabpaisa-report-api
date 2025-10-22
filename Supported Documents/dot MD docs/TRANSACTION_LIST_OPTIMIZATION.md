@@ -163,7 +163,7 @@ Users can still access all data using these filters:
 ### Test 1: Default Load (No filters)
 ```bash
 # Should return today's transactions only
-curl "http://localhost:8000/api/v1/transactions/admin-history/?page=1&page_size=100"
+curl "http://13.127.244.103:8000/api/v1/transactions/admin-history/?page=1&page_size=100"
 
 Expected response:
 {
@@ -179,7 +179,7 @@ Expected time: 200-500ms
 ### Test 2: Week Filter
 ```bash
 # Should return last 7 days
-curl "http://localhost:8000/api/v1/transactions/admin-history/?date_filter=week&page=1&page_size=100"
+curl "http://13.127.244.103:8000/api/v1/transactions/admin-history/?date_filter=week&page=1&page_size=100"
 
 Expected response:
 {
@@ -193,7 +193,7 @@ Expected time: 1-2 seconds
 ### Test 3: Custom Range
 ```bash
 # Should return specified date range
-curl "http://localhost:8000/api/v1/transactions/admin-history/?date_filter=custom&date_from=2025-01-01&date_to=2025-01-31&page=1"
+curl "http://13.127.244.103:8000/api/v1/transactions/admin-history/?date_filter=custom&date_from=2025-01-01&date_to=2025-01-31&page=1"
 
 Expected response:
 {

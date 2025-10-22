@@ -39,7 +39,7 @@ DB_PRIMARY_HOST=localhost
 ### 🟢 STEP 3: Run the Server
 1. Select **"🚀 Run Django Server (F5)"** from dropdown
 2. **Press F5**
-3. Server starts automatically at http://localhost:8000
+3. Server starts automatically at http://13.127.244.103:8000
 
 ## 🎮 VS Code Keyboard Shortcuts
 
@@ -122,7 +122,7 @@ sabpaisa-reports-api/
 
 ### View API Documentation
 1. Run server with F5
-2. Open browser: http://localhost:8000/api/docs/
+2. Open browser: http://13.127.244.103:8000/api/docs/
 
 ## 🔍 Troubleshooting in VS Code
 
@@ -159,12 +159,12 @@ CREATE DATABASE spclientonboard;
 1. Install Thunder Client extension (already recommended)
 2. Click Thunder Client icon in sidebar
 3. Create new request
-4. Set URL: http://localhost:8000/api/v1/...
+4. Set URL: http://13.127.244.103:8000/api/v1/...
 5. Add headers: `Authorization: Bearer <token>`
 
 ### Login to Get Token:
 ```
-POST http://localhost:8000/api/v1/auth/login/
+POST http://13.127.244.103:8000/api/v1/auth/login/
 {
     "username": "admin",
     "password": "your_password"

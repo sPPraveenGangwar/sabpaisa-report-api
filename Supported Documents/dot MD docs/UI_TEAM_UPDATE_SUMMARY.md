@@ -64,7 +64,7 @@ Every API call now returns these additional headers:
 
 ```javascript
 // When calling any API
-const response = await fetch('http://localhost:8000/api/v1/transactions/', {
+const response = await fetch('http://13.127.244.103:8000/api/v1/transactions/', {
   headers: { 'Authorization': `Bearer ${token}` }
 });
 
@@ -130,7 +130,7 @@ async function callAPI(url) {
 // Check if backend is healthy (no auth needed)
 async function checkSystemHealth() {
   try {
-    const response = await fetch('http://localhost:8000/api/v1/system/health/');
+    const response = await fetch('http://13.127.244.103:8000/api/v1/system/health/');
     const health = await response.json();
 
     if (health.status === 'healthy') {
@@ -160,7 +160,7 @@ checkSystemHealth();
 async function loadAdminDashboard() {
   // Get system metrics
   const metricsResponse = await fetch(
-    'http://localhost:8000/api/v1/system/metrics/',
+    'http://13.127.244.103:8000/api/v1/system/metrics/',
     { headers: { 'Authorization': `Bearer ${adminToken}` } }
   );
   const metrics = await metricsResponse.json();
@@ -184,7 +184,7 @@ async function loadAdminDashboard() {
 
 ```bash
 # Test login (should work exactly as before)
-curl -X POST http://localhost:8000/api/v1/auth/login/ \
+curl -X POST http://13.127.244.103:8000/api/v1/auth/login/ \
   -H "Content-Type: application/json" \
   -d '{"username":"test@example.com","password":"test123"}'
 
@@ -196,7 +196,7 @@ curl -X POST http://localhost:8000/api/v1/auth/login/ \
 
 ```bash
 # Make any API call and view headers
-curl -I http://localhost:8000/api/v1/transactions/ \
+curl -I http://13.127.244.103:8000/api/v1/transactions/ \
   -H "Authorization: Bearer YOUR_TOKEN"
 
 # You'll see new headers:
@@ -212,7 +212,7 @@ curl -I http://localhost:8000/api/v1/transactions/ \
 
 ```bash
 # No authentication required
-curl http://localhost:8000/api/v1/system/health/
+curl http://13.127.244.103:8000/api/v1/system/health/
 
 # Response:
 {

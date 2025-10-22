@@ -64,7 +64,7 @@ The Reserve Bank of India mandates specific requirements for payment gateway ope
 **Audit Evidence**:
 ```bash
 # Generate transaction report for RBI audit
-curl -X GET "http://localhost:8000/api/v1/transactions/admin-history/?date_from=2025-01-01&date_to=2025-12-31&status=ALL&page_size=10000" \
+curl -X GET "http://13.127.244.103:8000/api/v1/transactions/admin-history/?date_from=2025-01-01&date_to=2025-12-31&status=ALL&page_size=10000" \
   -H "Authorization: Bearer ADMIN_TOKEN" \
   --output rbi_transaction_report.json
 ```
@@ -88,7 +88,7 @@ curl -X GET "http://localhost:8000/api/v1/transactions/admin-history/?date_from=
 **Audit Evidence**:
 ```bash
 # Generate settlement reconciliation report
-curl -X GET "http://localhost:8000/api/v1/settlements/grouped-view/?settlement_date_from=2025-10-01&settlement_date_to=2025-10-31" \
+curl -X GET "http://13.127.244.103:8000/api/v1/settlements/grouped-view/?settlement_date_from=2025-10-01&settlement_date_to=2025-10-31" \
   -H "Authorization: Bearer ADMIN_TOKEN" \
   --output rbi_settlement_report.json
 ```
@@ -143,7 +143,7 @@ curl -X GET "http://localhost:8000/api/v1/settlements/grouped-view/?settlement_d
 **Audit Evidence**:
 ```bash
 # Generate audit log report for RBI
-curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?date_from=2025-10-01&date_to=2025-10-31&limit=10000" \
+curl -X GET "http://13.127.244.103:8000/api/v1/system/audit-logs/?date_from=2025-10-01&date_to=2025-10-31&limit=10000" \
   -H "Authorization: Bearer ADMIN_TOKEN" \
   --output rbi_audit_logs.json
 ```
@@ -382,7 +382,7 @@ class SecurityHeadersMiddleware(MiddlewareMixin):
 **For Auditors**:
 ```bash
 # Get all admin actions for audit period
-curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?action=admin_action&date_from=2025-01-01&date_to=2025-12-31&limit=10000" \
+curl -X GET "http://13.127.244.103:8000/api/v1/system/audit-logs/?action=admin_action&date_from=2025-01-01&date_to=2025-12-31&limit=10000" \
   -H "Authorization: Bearer AUDITOR_TOKEN" \
   --output audit_trail_report.json
 ```
@@ -404,7 +404,7 @@ curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?action=admin_action
 **Export Capabilities**:
 ```bash
 # Export all transactions for audit period
-curl -X GET "http://localhost:8000/api/v1/transactions/admin-history-excel/?date_from=2025-01-01&date_to=2025-12-31" \
+curl -X GET "http://13.127.244.103:8000/api/v1/transactions/admin-history-excel/?date_from=2025-01-01&date_to=2025-12-31" \
   -H "Authorization: Bearer ADMIN_TOKEN" \
   --output audit_transactions.xlsx
 ```
@@ -424,7 +424,7 @@ curl -X GET "http://localhost:8000/api/v1/transactions/admin-history-excel/?date
 **For Auditors**:
 ```bash
 # Get settlement reconciliation report
-curl -X GET "http://localhost:8000/api/v1/settlements/grouped-view/?settlement_date_from=2025-01-01&settlement_date_to=2025-12-31" \
+curl -X GET "http://13.127.244.103:8000/api/v1/settlements/grouped-view/?settlement_date_from=2025-01-01&settlement_date_to=2025-12-31" \
   -H "Authorization: Bearer ADMIN_TOKEN" \
   --output settlement_reconciliation.json
 ```
@@ -483,7 +483,7 @@ Generate comprehensive RBI audit package:
 AUDIT_PERIOD_START="2025-01-01"
 AUDIT_PERIOD_END="2025-12-31"
 ADMIN_TOKEN="your-admin-token"
-BASE_URL="http://localhost:8000/api/v1"
+BASE_URL="http://13.127.244.103:8000/api/v1"
 
 # 1. Transaction Report
 curl -X GET "${BASE_URL}/transactions/admin-history-excel/?date_from=${AUDIT_PERIOD_START}&date_to=${AUDIT_PERIOD_END}" \
@@ -521,7 +521,7 @@ Generate PCI DSS compliance reports:
 AUDIT_PERIOD_START="2025-01-01"
 AUDIT_PERIOD_END="2025-12-31"
 ADMIN_TOKEN="your-admin-token"
-BASE_URL="http://localhost:8000/api/v1"
+BASE_URL="http://13.127.244.103:8000/api/v1"
 
 # 1. Security Audit Logs
 curl -X GET "${BASE_URL}/system/audit-logs/?action=authentication&date_from=${AUDIT_PERIOD_START}&date_to=${AUDIT_PERIOD_END}" \
@@ -553,7 +553,7 @@ echo "PCI DSS Audit Reports Generated Successfully!"
 #### Query 1: Failed Transaction Analysis
 ```bash
 # Get all failed transactions for investigation
-curl -X GET "http://localhost:8000/api/v1/transactions/admin-history/?status=FAILED&date_from=2025-01-01&date_to=2025-12-31&page_size=10000" \
+curl -X GET "http://13.127.244.103:8000/api/v1/transactions/admin-history/?status=FAILED&date_from=2025-01-01&date_to=2025-12-31&page_size=10000" \
   -H "Authorization: Bearer ADMIN_TOKEN"
 ```
 
@@ -561,14 +561,14 @@ curl -X GET "http://localhost:8000/api/v1/transactions/admin-history/?status=FAI
 ```bash
 # Get transactions above certain amount
 # (Filter in application layer after fetching)
-curl -X GET "http://localhost:8000/api/v1/transactions/admin-history/?date_from=2025-01-01&date_to=2025-12-31" \
+curl -X GET "http://13.127.244.103:8000/api/v1/transactions/admin-history/?date_from=2025-01-01&date_to=2025-12-31" \
   -H "Authorization: Bearer ADMIN_TOKEN"
 ```
 
 #### Query 3: User Activity Report
 ```bash
 # Get specific user's activity
-curl -X GET "http://localhost:8000/api/v1/system/audit-logs/?user=admin@sabpaisa.in&date_from=2025-01-01" \
+curl -X GET "http://13.127.244.103:8000/api/v1/system/audit-logs/?user=admin@sabpaisa.in&date_from=2025-01-01" \
   -H "Authorization: Bearer ADMIN_TOKEN"
 ```
 
