@@ -8,19 +8,24 @@ YELLOW="\033[1;33m"
 RED="\033[0;31m"
 NC="\033[0m"
 
+# Get current branch dynamically
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+DEPLOY_ENV=${DEPLOY_ENV:-"dev"}
+
 echo -e "${GREEN}========================================${NC}"
 echo -e "${GREEN}  SabPaisa Report API - Auto Deployment${NC}"
 echo -e "${GREEN}========================================${NC}"
+echo -e "${YELLOW}[INFO] Branch: ${CURRENT_BRANCH}${NC}"
+echo -e "${YELLOW}[INFO] Environment: ${DEPLOY_ENV}${NC}"
 
 # Check if .env file exists
 if [ ! -f ".env" ]; then
-    echo -e "${YELLOW}[WARN] .env file not found. Creating from stash...${NC}"
-    git stash pop || echo "No stashed changes"
+    echo -e "${YELLOW}[WARN] .env file not found for active environment${NC}"
 fi
 
-# Pull latest changes
-echo -e "${GREEN}[INFO] Pulling latest changes...${NC}"
-git pull origin development
+# Pull latest changes from current branch
+echo -e "${GREEN}[INFO] Pulling latest changes from ${CURRENT_BRANCH}...${NC}"
+git pull origin ${CURRENT_BRANCH}
 
 # Build and restart Docker containers
 echo -e "${GREEN}[INFO] Building Docker containers...${NC}"
