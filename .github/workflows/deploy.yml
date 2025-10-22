@@ -1,0 +1,88 @@
+name: Deploy Backend to AWS EC2
+
+on:
+  push:
+    branches:
+      - development
+      - staging
+      - production
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'development'
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set environment variables
+        id: set-env
+        run: |
+          BRANCH_NAME="${GITHUB_REF#refs/heads/}"
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            ENV="${{ github.event.inputs.environment }}"
+          else
+            case "$BRANCH_NAME" in
+              development)
+                ENV="dev"
+                ;;
+              staging)
+                ENV="stage"
+                ;;
+              production)
+                ENV="prod"
+                ;;
+              *)
+                ENV="dev"
+                ;;
+            esac
+          fi
+
+          echo "environment=$ENV" >> $GITHUB_OUTPUT
+          echo "branch=$BRANCH_NAME" >> $GITHUB_OUTPUT
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          envs: DEPLOY_BRANCH,DEPLOY_ENV
+          script: |
+            # Set environment variables
+            export DEPLOY_BRANCH="${{ steps.set-env.outputs.branch }}"
+            export DEPLOY_ENV="${{ steps.set-env.outputs.environment }}"
+
+            echo "Deploying branch: $DEPLOY_BRANCH to environment: $DEPLOY_ENV"
+
+            # Navigate to project directory
+            cd ~/projects/sabpaisa-report-api
+
+            # Pull latest changes
+            git fetch origin
+            git checkout $DEPLOY_BRANCH
+            git pull origin $DEPLOY_BRANCH
+
+            # Switch to appropriate environment
+            if [ -f "switch-env.sh" ]; then
+              chmod +x switch-env.sh
+              ./switch-env.sh $DEPLOY_ENV
+            fi
+
+            # Run deployment script with environment variable
+            chmod +x deploy.sh
+            ./deploy.sh
+
+            echo "✅ Successfully deployed to $DEPLOY_ENV environment"

@@ -32,7 +32,7 @@ This document provides comprehensive documentation for all implemented APIs in t
 
 ### Base URL
 ```
-Development: http://localhost:8000/api/v1
+Development: http://13.127.244.103:8000/api/v1
 Production: https://api.sabpaisa.com/api/v1
 Staging: https://staging-api.sabpaisa.com/api/v1
 ```
@@ -532,7 +532,7 @@ GET /api/v1/transactions/merchant-history/?date_from=2024-01-01T00:00:00Z&date_t
     "count": 1543,
     "total_pages": 16,
     "current_page": 1,
-    "next": "http://localhost:8000/api/v1/transactions/merchant-history/?page=2",
+    "next": "http://13.127.244.103:8000/api/v1/transactions/merchant-history/?page=2",
     "previous": null,
     "page_size": 100,
     "results": [
@@ -2499,7 +2499,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGc...
 {
     "success": true,
     "count": 150,
-    "next": "http://localhost:8000/api/v1/qwikforms/transactions/?page=2",
+    "next": "http://13.127.244.103:8000/api/v1/qwikforms/transactions/?page=2",
     "previous": null,
     "results": [
         {
