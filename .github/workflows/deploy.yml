@@ -53,12 +53,28 @@ jobs:
           echo "environment=$ENV" >> $GITHUB_OUTPUT
           echo "branch=$BRANCH_NAME" >> $GITHUB_OUTPUT
 
+      - name: Set SSH credentials based on environment
+        id: set-credentials
+        run: |
+          ENV="${{ steps.set-env.outputs.environment }}"
+
+          if [ "$ENV" = "stage" ]; then
+            echo "ssh_host=${{ secrets.EC2_HOST_STAGING }}" >> $GITHUB_OUTPUT
+            echo "ssh_key=${{ secrets.EC2_SSH_KEY_STAGING }}" >> $GITHUB_OUTPUT
+          elif [ "$ENV" = "prod" ]; then
+            echo "ssh_host=${{ secrets.EC2_HOST_PROD }}" >> $GITHUB_OUTPUT
+            echo "ssh_key=${{ secrets.EC2_SSH_KEY_PROD }}" >> $GITHUB_OUTPUT
+          else
+            echo "ssh_host=${{ secrets.EC2_HOST }}" >> $GITHUB_OUTPUT
+            echo "ssh_key=${{ secrets.EC2_SSH_KEY }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.EC2_HOST }}
+          host: ${{ steps.set-credentials.outputs.ssh_host }}
           username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
+          key: ${{ steps.set-credentials.outputs.ssh_key }}
           envs: DEPLOY_BRANCH,DEPLOY_ENV
           script: |
             # Set environment variables
